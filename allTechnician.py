@@ -11,7 +11,7 @@ import sqlite3
 
 def viewAllTechnician():
     technicianWindow = tkinter.Tk()
-    technicianWindow.title("Complaint Optimization Window")
+    technicianWindow.title("Tech Support Partners")
     # technicianWindow = Toplevel()
     # technicianWindow.title("All Technicians")
     # technicianWindow.geometry("800X800")
