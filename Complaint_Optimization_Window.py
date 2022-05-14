@@ -1,3 +1,4 @@
+import email
 import tkinter
 # from main import addTechnician
 from emailSender import *
@@ -46,7 +47,7 @@ def selectTechSupport():
     c.execute(query)
     records = c.fetchall()
     listRecords = list(records)
-    print(listRecords)
+    # print(listRecords)
 
 
     
@@ -77,6 +78,8 @@ def selectTechSupport():
         print(selectedTechnician.get())
         # selectionVariable = v.get()
         selectionButton.config(text=selectedTechnician.get())
+        selectionWindow.destroy()
+
 
 
 
@@ -343,22 +346,22 @@ def addComplaint():
     c = conn.cursor()
 
     # create complaint table
-    c.execute(""" CREATE TABLE complaints (
-        customerName text,
-        customerNumber text,
-        customerEmail text,
-        customerAddress text,
-        invoiceNumber text,
-        customerCity text,
-        customerPincode text,
-        productSerialNumber text,
-        productType text,
-        productName text,
-        complaintDescription text,
-        allocatedTechnician text,
-        complaintDate text,
-        status text
-        )""")
+    # c.execute(""" CREATE TABLE complaints (
+    #     customerName text,
+    #     customerNumber text,
+    #     customerEmail text,
+    #     customerAddress text,
+    #     invoiceNumber text,
+    #     customerCity text,
+    #     customerPincode text,
+    #     productSerialNumber text,
+    #     productType text,
+    #     productName text,
+    #     complaintDescription text,
+    #     allocatedTechnician text,
+    #     complaintDate text,
+    #     status text
+    #     )""")
 
     # Insert into table
 
@@ -389,6 +392,11 @@ def addComplaint():
 
     print("added to db")
 
+    nameEntry.delete(0,END); 
+    mobEntry.delete(0, END); addrEntry.delete(0,END); invoiceEntry.delete(0,END); cityEntry.delete(0,END); 
+    emailEntry.delete(0,END); pinEntry.delete(0,END); prdctNoEntry.delete(0,END); prdctNameEntry.delete(0,END); 
+    complaintDetailsEntry.delete(0,END)
+
 
 # def dropTable():
 #     # create a database or connect to one
@@ -408,26 +416,44 @@ def addComplaint():
 
 
 # Customer Details entry box
-nameEntry = tkinter.Entry(master, textvariable=cstmrName).grid(row=2, column=2)
-mobEntry = tkinter.Entry(master, textvariable=cstmrNmbr).grid(row=2, column=5)
-addrEntry = tkinter.Entry(master, textvariable=cstmrAdrs).grid(row=3, column=2)
-invoiceEntry = tkinter.Entry(master, textvariable=invoiceNo).grid(row=3, column=5)
-cityEntry = tkinter.Entry(master, textvariable=cstmrCity).grid(row=4, column=2)
-emailEntry = tkinter.Entry(master, textvariable=cstmrEmail).grid(row=5, column=2)
-pinEntry = tkinter.Entry(master, textvariable=cstmrPincode).grid(row=4, column=5)
+nameEntry = tkinter.Entry(master, textvariable=cstmrName)
+nameEntry.grid(row=2, column=2)
+
+mobEntry = tkinter.Entry(master, textvariable=cstmrNmbr)
+mobEntry.grid(row=2, column=5)
+
+addrEntry = tkinter.Entry(master, textvariable=cstmrAdrs)
+addrEntry.grid(row=3, column=2)
+
+invoiceEntry = tkinter.Entry(master, textvariable=invoiceNo)
+invoiceEntry.grid(row=3, column=5)
+
+cityEntry = tkinter.Entry(master, textvariable=cstmrCity)
+cityEntry.grid(row=4, column=2)
+
+emailEntry = tkinter.Entry(master, textvariable=cstmrEmail)
+emailEntry.grid(row=5, column=2)
+
+pinEntry = tkinter.Entry(master, textvariable=cstmrPincode)
+pinEntry.grid(row=4, column=5)
+
 cal= DateEntry(master,selectmode='day')
 cal.grid(row=7,column=5)
+
 # Complaint detail entry box
-prdctNoEntry = tkinter.Entry(master, textvariable=prdctNo).grid(row=7, column=2)
+prdctNoEntry = tkinter.Entry(master, textvariable=prdctNo)
+prdctNoEntry.grid(row=7, column=2)
 # prdctNameEntry = tkinter.Entry(master, textvariable=prdctName).grid(row=7, column=2)
 
 prdctType.set("                               ")
 productDrop = tkinter.OptionMenu(master, prdctType, *serviceOptions)
 productDrop.grid(row=8, column=2)
 
-prdctNameEntry = tkinter.Entry(master, textvariable=prdctName).grid(row=8, column=5)
+prdctNameEntry = tkinter.Entry(master, textvariable=prdctName)
+prdctNameEntry.grid(row=8, column=5)
 
-complaintDetailsEntry = tkinter.Entry(master, textvariable=complaintDetails).grid(row=9, column=2)
+complaintDetailsEntry = tkinter.Entry(master, textvariable=complaintDetails)
+complaintDetailsEntry.grid(row=9, column=2)
 
 # allocateTechnicianEntry = tkinter.Entry(master, textvariable=allocateTechnician).grid(row=9, column=2)
 # Header in navbar
