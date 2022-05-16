@@ -1,0 +1,5 @@
+Pillow==9.0.1
+tkcalendar==1.6.1
+tkintermapview==1.11
+XlsxWriter==3.0.3
+pyperclip==2.4.7
