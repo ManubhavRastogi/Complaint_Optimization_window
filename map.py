@@ -4,10 +4,6 @@ def mapCreator(technicianAddress, customerAddress):
     import tkinter
     import os
     from tkintermapview import TkinterMapView
-
-    # create tkinter window
-    # root = tkinter.Tk()
-
     root = tkinter.Toplevel()
 
 

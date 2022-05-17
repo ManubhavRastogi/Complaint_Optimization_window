@@ -16,7 +16,8 @@ def addComplaint():
     # creates a Tk() object
     master = tkinter.Tk()
     master.title("Complaint Optimization Window")
-    #master.geometry("680x300")
+    master.geometry("845x300")
+
     serviceOptions = [
             "Air Conditioner and fans",
             "Washing Machine",
@@ -53,13 +54,13 @@ def addComplaint():
         
 
         # Setting labels for selection window
-        defEmpIdLabel = tkinter.Label(selectionWindow, text="Emp. Id")
+        defEmpIdLabel = tkinter.Label(selectionWindow, text="Employee Id",font='ariel 9 bold')
         defEmpIdLabel.grid(row=0, column= 0)
 
-        defNameLabel = tkinter.Label(selectionWindow, text="Emp. Name")
+        defNameLabel = tkinter.Label(selectionWindow, text="Emp. Name", font='ariel 9 bold')
         defNameLabel.grid(row=0, column= 2)
 
-        defCityLabel = tkinter.Label(selectionWindow, text="Emp. City")
+        defCityLabel = tkinter.Label(selectionWindow, text="Emp. City",font='ariel 9 bold')
         defCityLabel.grid(row=0, column= 4)
 
 
@@ -85,19 +86,19 @@ def addComplaint():
 
         #  Updating tech support partner details from databse on basis of Product type
         for(techId, name, city, oid) in listRecords:
-            empIdLabel = tkinter.Label(selectionWindow, text=techId)
-            empIdLabel.grid(row=rowVar, column= 0)
+            empIdLabel=tkinter.Label(selectionWindow, text=techId)
+            empIdLabel.grid(row=rowVar, column=0)
 
             nameLabel = tkinter.Label(selectionWindow, text=name)
-            nameLabel.grid(row=rowVar, column= 2)
+            nameLabel.grid(row=rowVar, column=2)
 
 
             cityLabel = tkinter.Label(selectionWindow, text=city)
-            cityLabel.grid(row=rowVar, column= 4)        
+            cityLabel.grid(row=rowVar, column=4)
 
-            rB = tkinter.Radiobutton(selectionWindow, variable = selectedTechnician,
-                value = techId, command= rbOnClick)
-            rB.grid(row=rowVar, column= 6)
+            rB = tkinter.Radiobutton(selectionWindow, variable=selectedTechnician,
+                value=techId, command=rbOnClick)
+            rB.grid(row=rowVar, column=6)
 
             rowVar = rowVar + 1
 
@@ -108,6 +109,7 @@ def addComplaint():
     def addTechnician():
 
         window = Toplevel()
+        window.config(bg='white')
         
 
         empId = tkinter.StringVar()
@@ -227,48 +229,48 @@ def addComplaint():
         # close connection
         conn.close()
 
+        label = tkinter.Label(window, text="Complaint Optimization Window", background="white",font='ariel 15 bold underline')
+        label.grid(row=0, column=1)
+
+        l1 = tkinter.Label(window, text="Enter Employee Id:", background="white", font='ariel 9 bold').grid(row=1,sticky=tkinter.W)
+        l2 = tkinter.Label(window, text="Enter Full Name:", background="white", font='ariel 9 bold').grid(row=2,sticky=tkinter.W)
+        l3 = tkinter.Label(window, text="Enter Email Adddress:", background="white", font='ariel 9 bold').grid(row=3,sticky=tkinter.W)
+        l4 = tkinter.Label(window, text="Enter Mobile Number:", background="white", font='ariel 9 bold').grid(row=4,sticky=tkinter.W)
+        l5 = tkinter.Label(window, text="Select Tech Expertise:", background="white", font='ariel 9 bold').grid(row=5,sticky=tkinter.W)
+        l6 = tkinter.Label(window, text="Enter city:", background="white", font='ariel 9 bold').grid(row=6,sticky=tkinter.W)
+        l7 = tkinter.Label(window, text="Enter district:", background="white", font='ariel 9 bold').grid(row=7, sticky=tkinter.W)
+        l8 = tkinter.Label(window, text="Enter address:", background="white", font='ariel 9 bold').grid(row=8,sticky=tkinter.W)
+        l9 = tkinter.Label(window, text="Enter state:", background="white", font='ariel 9 bold').grid(row=9,sticky=tkinter.W)
+        l10 = tkinter.Label(window, text="Enter pincode:", background="white", font='ariel 9 bold').grid(row=10,sticky=tkinter.W)
 
 
 
-
-        l1 = tkinter.Label(window, text="Enter Employee Id:").grid(row=0, sticky=tkinter.W)
-        l2 = tkinter.Label(window, text="Enter Full Name:").grid(row=1, sticky=tkinter.W)
-        l3 = tkinter.Label(window, text="Enter Email Adddress:").grid(row=2, sticky=tkinter.W)
-        l4 = tkinter.Label(window, text="Enter Mobile Number:").grid(row=3, sticky=tkinter.W)
-        l5 = tkinter.Label(window, text="Select Tech Expertise:").grid(row=4, sticky=tkinter.W)
-
-
-        l6 = tkinter.Label(window, text="Enter city:").grid(row=5, sticky=tkinter.W)
-        l7 = tkinter.Label(window, text="Enter district:").grid(row=6, sticky=tkinter.W)
-        l8 = tkinter.Label(window, text="Enter address:").grid(row=7, sticky=tkinter.W)
-        l9 = tkinter.Label(window, text="Enter state:").grid(row=8, sticky=tkinter.W)
-        l10 = tkinter.Label(window, text="Enter pincode:").grid(row=9, sticky=tkinter.W)
 
 
         t1 = tkinter.Entry(window, textvariable=empId)
-        t1.grid(row=0, column=3)
+        t1.grid(row=1, column=3)
         t2 = tkinter.Entry(window, textvariable=name)
-        t2.grid(row=1, column=3)
+        t2.grid(row=2, column=3)
         t3 = tkinter.Entry(window, textvariable=email)
-        t3.grid(row=2, column=3)
+        t3.grid(row=3, column=3)
         t4 = tkinter.Entry(window, textvariable=mobile)
-        t4.grid(row=3, column=3)
+        t4.grid(row=4, column=3)
         #t5 = tkinter.Entry(window, textvariable=techExpertise).grid(row=4,column=1)
 
         techExpertise.set("                               ")
         drop = tkinter.OptionMenu(window, techExpertise, *serviceOptions)
-        drop.grid(row=4, column=3)
+        drop.grid(row=5, column=3)
 
         t6 = tkinter.Entry(window, textvariable=city)
-        t6.grid(row=5, column=3)
+        t6.grid(row=6, column=3)
         t7 = tkinter.Entry(window, textvariable=district)
-        t7.grid(row=6, column=3)
+        t7.grid(row=7, column=3)
         t8 = tkinter.Entry(window, textvariable=address)
-        t8.grid(row=7, column=3)
+        t8.grid(row=8, column=3)
         t9 = tkinter.Entry(window, textvariable=state)
-        t9.grid(row=8, column=3)
+        t9.grid(row=9, column=3)
         t10 = tkinter.Entry(window, textvariable=pincode)
-        t10.grid(row=9, column=3)
+        t10.grid(row=10, column=3)
 
         # Button for adding employee
         b = tkinter.Button(window, text="Add Employee", command=addEmployeeHandler)
@@ -292,20 +294,16 @@ def addComplaint():
     # lable = Lable(master,text = "Complaint Optimization Window")
     # label.pack(side = TOP, pady = 10)
 
-    label = tkinter.Label(text="Complaint Optimization Window")
+    label = tkinter.Label(text="Complaint Optimization Window", font='ariel 15 bold underline')
     label.grid(row=0, column = 3, sticky= W,pady=2)
 
 
-    # lable for selecting employee codes
-    label = tkinter.Label(text="Costumer Details")
+    #       lable for selecting employee codes
+
+    label = tkinter.Label(text="Costumer Details", font=' ariel 12 bold underline')
     label.grid(row=1, column=3)
-    #l1 = tkinter.Label(master, text='Costumer Name') l1.grid(row=3,column=0)
-    #l1 = tkinter.Label(master, text='Phone No. ') l1.grid(row=3,column=4)
-    #l1 = tkinter.Label(master, text='Select the employee code') l1.grid(row=2,column=0)
-    #emp_list = ["53258xed","67062bhd","84754geu","72209yei"] empId = tkinter.StringVar()
-    #empId.set("                               ")
-    #drop = tkinter.OptionMenu(master, empId, *emp_list)
-    #drop.grid(row=2, column=2)
+    label = tkinter.Label(text="Complaint Detail From", font=' ariel 12 bold underline')
+    label.grid(row=6, column=3)
     l1 = tkinter.Label(master, text="Name :").grid(row=2, sticky=tkinter.W)
     l2 = tkinter.Label(master, text="Phone No :").grid(row=2,column=4, sticky=tkinter.W)
     l3 = tkinter.Label(master, text="Costumer Adddress :").grid(row=3, sticky=tkinter.W)
@@ -313,19 +311,12 @@ def addComplaint():
     emailLabel = tkinter.Label(master, text="Email :").grid(row=5,column=0, sticky=tkinter.W)
     l5 = tkinter.Label(master, text="Pincode :").grid(row=4,column=4, sticky=tkinter.W)
     l6 = tkinter.Label(master, text="Invoice No. :").grid(row=3,column=4, sticky=tkinter.W)
-
-    label = tkinter.Label(text="Complaint Detail From")
-    label.grid(row=6, column=3)
-
     l7 = tkinter.Label(master, text="Product Serial No.:").grid(row=7, sticky=tkinter.W)
     l8 = tkinter.Label(master, text="Product Type :").grid(row=8, sticky=tkinter.W)
-    l8 = tkinter.Label(master, text="Complaint date :").grid(row=7,column=4)
-    l8 = tkinter.Label(master, text="Product Name :").grid(row=8,column=4)
-
-    l9 = tkinter.Label(master, text="Complaint Details").grid(row=9, sticky=tkinter.W)
-    l10 = tkinter.Label(master, text="Allocate technician").grid(row=9,column=4, sticky=tkinter.W)
-    # l11 = tkinter.Label(master, text="Enter state :").grid(row=10, sticky=tkinter.W)
-    # l12 = tkinter.Label(master,text="Enter pincode :").grid(row=11, sticky=tkinter.W)
+    l8 = tkinter.Label(master, text="Date :").grid(row=7,column=4, sticky=tkinter.W)
+    l8 = tkinter.Label(master, text="Product Name :").grid(row=8,column=4, sticky=tkinter.W)
+    l9 = tkinter.Label(master, text="Complaint Details :").grid(row=9, sticky=tkinter.W)
+    l10 = tkinter.Label(master, text="Allocate Technician :").grid(row=9,column=4, sticky=tkinter.W)
 
 
     # Custmer detail Variable initialised
@@ -459,52 +450,28 @@ def addComplaint():
         complaintDetailsEntry.delete(0,END)
 
 
-    # def dropTable():
-    #     # create a database or connect to one
-    #     conn = sqlite3.connect('Complaint_box.db')
-
-    #     # create cursor
-    #     c = conn.cursor()
-
-    #     c.execute("DROP TABLE complaints")
-    #     # commit changes
-    #     conn.commit()
-
-    #     # close connection
-    #     conn.close()
-
-        
-
 
     # Customer Details entry box
     nameEntry = tkinter.Entry(master, textvariable=cstmrName)
     nameEntry.grid(row=2, column=2)
-
     mobEntry = tkinter.Entry(master, textvariable=cstmrNmbr)
     mobEntry.grid(row=2, column=5)
-
     addrEntry = tkinter.Entry(master, textvariable=cstmrAdrs)
     addrEntry.grid(row=3, column=2)
-
     invoiceEntry = tkinter.Entry(master, textvariable=invoiceNo)
     invoiceEntry.grid(row=3, column=5)
-
     cityEntry = tkinter.Entry(master, textvariable=cstmrCity)
     cityEntry.grid(row=4, column=2)
-
     emailEntry = tkinter.Entry(master, textvariable=cstmrEmail)
     emailEntry.grid(row=5, column=2)
-
     pinEntry = tkinter.Entry(master, textvariable=cstmrPincode)
     pinEntry.grid(row=4, column=5)
-
     cal= DateEntry(master,selectmode='day')
     cal.grid(row=7,column=5)
 
     # Complaint detail entry box
     prdctNoEntry = tkinter.Entry(master, textvariable=prdctNo)
     prdctNoEntry.grid(row=7, column=2)
-    # prdctNameEntry = tkinter.Entry(master, textvariable=prdctName).grid(row=7, column=2)
 
     prdctType.set("                               ")
     productDrop = tkinter.OptionMenu(master, prdctType, *serviceOptions)
@@ -516,20 +483,17 @@ def addComplaint():
     complaintDetailsEntry = tkinter.Entry(master, textvariable=complaintDetails)
     complaintDetailsEntry.grid(row=9, column=2)
 
-    # allocateTechnicianEntry = tkinter.Entry(master, textvariable=allocateTechnician).grid(row=9, column=2)
-    # Header in navbar
-    def donothing():
-        x = 0
 
-
-    selectionButton = tkinter.Button(master, text="select tech support", command=selectTechSupport)
+    selectionButton = tkinter.Button(master, text="Select Technician",font='ariel 8 bold', command=selectTechSupport)
     selectionButton.grid(row=9, column=5, sticky=tkinter.W + tkinter.E + tkinter.N + tkinter.S)
 
-    complaintAddBtn = tkinter.Button(master, text="Add Complaint", command=addComplaint)
+    complaintAddBtn = tkinter.Button(master, text="Add Complaint", fg="white", background="#262626", font='ariel 8 bold', command=addComplaint)
     complaintAddBtn.grid(row=12, column=3, sticky=tkinter.W + tkinter.E + tkinter.N + tkinter.S,pady=15)
 
 
-
+    # Header in navbar
+    def donothing():
+        x = 0
 
 
     menubar = Menu(master)
@@ -540,7 +504,7 @@ def addComplaint():
     filemenu.add_command(label="All Technician", command=viewAllTechnician)
     filemenu.add_command(label="All Complaints", command=viewAllComplaits)
     filemenu.add_separator()
-    filemenu.add_command(label="Exit", command=master.quit)
+    filemenu.add_command(label="Exit", command=master.destroy)
     menubar.add_cascade(label="File", menu=filemenu)
 
     helpmenu = Menu(menubar, tearoff=0)

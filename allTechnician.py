@@ -12,6 +12,7 @@ import sqlite3
 def viewAllTechnician():
     technicianWindow = tkinter.Tk()
     technicianWindow.title("Tech Support Partners")
+
     # technicianWindow = Toplevel()
     # technicianWindow.title("All Technicians")
     # technicianWindow.geometry("800X800")
@@ -28,6 +29,7 @@ def viewAllTechnician():
     def viewDetailsWindow():
         detailsWindow = Toplevel(technicianWindow)
         detailsWindow.title("Technician's Details")
+        detailsWindow.config(background="white")
         # detailsWindow.geometry("800x800")
 
 
@@ -41,62 +43,62 @@ def viewAllTechnician():
 
 
 
-        defNameLabel = tkinter.Label(detailsWindow, text="Emp. Name: ", bg ="yellow")
+        defNameLabel = tkinter.Label(detailsWindow, text="Emp. Name : ", bg ="yellow")
         defNameLabel.grid(row=2, column= 0, sticky=tkinter.W)
 
-        defEmailLabel = tkinter.Label(detailsWindow, text="Email: ", bg ="yellow")
+        defEmailLabel = tkinter.Label(detailsWindow, text="Email : ", bg ="yellow")
         defEmailLabel.grid(row=4, column= 0, sticky=tkinter.W)
 
-        defMobLabel = tkinter.Label(detailsWindow, text="Mobile: ", bg ="yellow")
+        defMobLabel = tkinter.Label(detailsWindow, text="Mobile : ", bg ="yellow")
         defMobLabel.grid(row=4, column= 3, sticky=tkinter.W)
 
-        defExpLabel = tkinter.Label(detailsWindow, text="Expertise: ", bg ="yellow")
+        defExpLabel = tkinter.Label(detailsWindow, text="Expertise : ", bg ="yellow")
         defExpLabel.grid(row=2, column= 3, sticky=tkinter.W)
 
-        defCityLabel = tkinter.Label(detailsWindow, text="City: ", bg ="yellow")
+        defCityLabel = tkinter.Label(detailsWindow, text="City : ", bg ="yellow")
         defCityLabel.grid(row=6, column= 0, sticky=tkinter.W)
 
-        defDisLabel = tkinter.Label(detailsWindow, text="District: ", bg ="yellow")
+        defDisLabel = tkinter.Label(detailsWindow, text="District : ", bg ="yellow")
         defDisLabel.grid(row=6, column= 3, sticky=tkinter.W)
 
-        defAddLabel = tkinter.Label(detailsWindow, text="Address: ", bg ="yellow")
+        defAddLabel = tkinter.Label(detailsWindow, text="Address : ", bg ="yellow")
         defAddLabel.grid(row=10, column= 0, sticky=tkinter.W)
 
-        defPinLabel = tkinter.Label(detailsWindow, text="Pincode: ", bg ="yellow")
+        defPinLabel = tkinter.Label(detailsWindow, text="Pincode : ", bg ="yellow")
         defPinLabel.grid(row=8, column= 0, sticky=tkinter.W)
 
 
 
         for(employeeId, fullName, email, mobile, techExpertise, city, district, address, pincode) in reqEmployee:
-            empIdLabel = tkinter.Label(detailsWindow, text=employeeId)
+            empIdLabel = tkinter.Label(detailsWindow, text=employeeId, font='ariel 9 ')
             empIdLabel.grid(row=0, column= 2)
 
-            nameLabel = tkinter.Label(detailsWindow, text=fullName)
+            nameLabel = tkinter.Label(detailsWindow, text=fullName, font='ariel 9 ')
             nameLabel.grid(row=2, column= 1)
 
 
-            emailLabel = tkinter.Label(detailsWindow, text=email)
+            emailLabel = tkinter.Label(detailsWindow, text=email, font='ariel 9 ')
             emailLabel.grid(row=4, column= 1)
 
-            mobileLabel = tkinter.Label(detailsWindow, text=mobile)
+            mobileLabel = tkinter.Label(detailsWindow, text=mobile, font='ariel 9')
             mobileLabel.grid(row=4, column= 4)     
 
-            expertiseLabel = tkinter.Label(detailsWindow, text=techExpertise)
+            expertiseLabel = tkinter.Label(detailsWindow, text=techExpertise, font='ariel 9 ')
             expertiseLabel.grid(row=2, column= 4)     
 
-            cityLabel = tkinter.Label(detailsWindow, text=city)
+            cityLabel = tkinter.Label(detailsWindow, text=city,  font='ariel 9 ')
             cityLabel.grid(row=6, column= 1)     
 
-            districtLabel = tkinter.Label(detailsWindow, text=district)
+            districtLabel = tkinter.Label(detailsWindow, text=district, font='ariel 9 ')
             districtLabel.grid(row=6, column= 4)     
 
-            addLabel = tkinter.Label(detailsWindow, text=address)
+            addLabel = tkinter.Label(detailsWindow, text=address, font='ariel 9 ')
             addLabel.grid(row=10, column= 1, columnspan=3)     
 
-            pinLabel = tkinter.Label(detailsWindow, text=pincode)
+            pinLabel = tkinter.Label(detailsWindow, text=pincode, font='ariel 9 ')
             pinLabel.grid(row=8, column= 1)     
 
-            detailsWindow.grid_rowconfigure([1,3,5,7,9], minsize=10)  # Here
+            detailsWindow.grid_rowconfigure([1, 3, 5, 7, 9], minsize=10)  # Here
 
 
         
@@ -114,67 +116,28 @@ def viewAllTechnician():
 
 
     # Setting labels for selection window
-    defEmpIdLabel = tkinter.Label(technicianWindow, text="Emp. Id", bg ="yellow")
+    defEmpIdLabel = tkinter.Label(technicianWindow, text="Employee Id :", bg ="yellow", font='ariel 10 bold')
     defEmpIdLabel.grid(row=0, column= 0)
-
-    defNameLabel = tkinter.Label(technicianWindow, text="Emp. Name", bg ="yellow")
+    defNameLabel = tkinter.Label(technicianWindow, text="Employee Name :", bg ="yellow", font='ariel 10 bold')
     defNameLabel.grid(row=0, column= 2)
-
-    defEmailLabel = tkinter.Label(technicianWindow, text="Email", bg ="yellow")
+    defEmailLabel = tkinter.Label(technicianWindow, text="Email :", bg="yellow", font='ariel 10 bold')
     defEmailLabel.grid(row=0, column= 4)
-
-    # defMobLabel = tkinter.Label(technicianWindow, text="Mobile", bg ="yellow")
-    # defMobLabel.grid(row=0, column= 6)
-
-    defExpLabel = tkinter.Label(technicianWindow, text="Expertise", bg ="yellow")
+    defExpLabel = tkinter.Label(technicianWindow, text="Expertise :", bg ="yellow", font='ariel 10 bold')
     defExpLabel.grid(row=0, column= 6)
-
-    # defCityLabel = tkinter.Label(technicianWindow, text="City", bg ="yellow")
-    # defCityLabel.grid(row=0, column= 10)
-
-    # defDisLabel = tkinter.Label(technicianWindow, text="District", bg ="yellow")
-    # defDisLabel.grid(row=0, column= 12)
-
-    # defAddLabel = tkinter.Label(technicianWindow, text="Address", bg ="yellow")
-    # defAddLabel.grid(row=0, column= 14)
-
-    # defPinLabel = tkinter.Label(technicianWindow, text="Pincode", bg ="yellow")
-    # defPinLabel.grid(row=0, column= 16)
-    
-
     rowVar = 1
 
     for(employeeId, fullName, email, mobile, techExpertise, city, district, address, pincode) in listallEmployees:
-        empIdLabel = tkinter.Label(technicianWindow, text=employeeId)
-        empIdLabel.grid(row=rowVar, column= 0)
+        empIdLabel = tkinter.Label(technicianWindow, text=employeeId,font='ariel 9')
+        empIdLabel.grid(row=rowVar, column=0)
+        nameLabel = tkinter.Label(technicianWindow, text=fullName, font='ariel 9')
+        nameLabel.grid(row=rowVar, column=2)
+        emailLabel = tkinter.Label(technicianWindow, text=email, font='ariel 9')
+        emailLabel.grid(row=rowVar, column=4)
+        expertiseLabel = tkinter.Label(technicianWindow, text=techExpertise, font='ariel 9')
+        expertiseLabel.grid(row=rowVar, column=6)
 
-        nameLabel = tkinter.Label(technicianWindow, text=fullName)
-        nameLabel.grid(row=rowVar, column= 2)
-
-
-        emailLabel = tkinter.Label(technicianWindow, text=email)
-        emailLabel.grid(row=rowVar, column= 4)
-
-        # mobileLabel = tkinter.Label(technicianWindow, text=mobile)
-        # mobileLabel.grid(row=rowVar, column= 6)     
-
-        expertiseLabel = tkinter.Label(technicianWindow, text=techExpertise)
-        expertiseLabel.grid(row=rowVar, column= 6)     
-
-        # cityLabel = tkinter.Label(technicianWindow, text=city)
-        # cityLabel.grid(row=rowVar, column= 10)     
-
-        # districtLabel = tkinter.Label(technicianWindow, text=district)
-        # districtLabel.grid(row=rowVar, column= 12)     
-
-        # addLabel = tkinter.Label(technicianWindow, text=address)
-        # addLabel.grid(row=rowVar, column= 14)     
-
-        # pinLabel = tkinter.Label(technicianWindow, text=pincode)
-        # pinLabel.grid(row=rowVar, column= 16)     
-
-        rB = tkinter.Radiobutton(technicianWindow, variable = selectedEmployee, value = employeeId, command= rbOnClick)
-        rB.grid(row=rowVar, column= 7)
+        rB = tkinter.Radiobutton(technicianWindow, variable=selectedEmployee, value=employeeId, command=rbOnClick)
+        rB.grid(row=rowVar, column=7)
 
 
         rowVar = rowVar + 1
