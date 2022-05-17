@@ -1,21 +1,43 @@
-def mailsender(reciever, subject, message):
-    import smtplib
-    from email.message import EmailMessage
+import smtplib, ssl
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
 
-    msg = EmailMessage()
-    msg.set_content(message)
-    # msg.set_content('This is my message')
+def mailer(receiver_email, subject, emailMessage):
 
-    msg['Subject'] = subject
-    # msg['Subject'] = 'Hired as technician in Royal Tech Support'
-    msg['From'] = "complaintoptimizationwindow@gmail.com"
-    msg['To'] = reciever
-    # msg['To'] = "mukulkumar2652@gmail.com"
+    sender_email = "complaintoptimizationwindow@gmail.com"
+    # receiver_email = "manubhav2002rastogi@gmail.com"
+    password = "Manubhav@123"
 
-    # Send the message via our own SMTP server.
-    server = smtplib.SMTP_SSL('smtp.gmail.com', 465)
-    server.login("complaintoptimizationwindow@gmail.com", "Manubhav@123")
-    server.send_message(msg)
+    message = MIMEMultipart("alternative")
+    message["Subject"] = subject
+    message["From"] = sender_email
+    message["To"] = receiver_email
 
-    print("message sent successfully")
-    server.quit()
+    # Create the plain-text and HTML version of your message
+    html = """\
+    <html>
+    <body>
+        {message}
+    </body>
+    </html>
+    """.format(message = emailMessage)
+
+    # .format(imageLink = imageLink)
+
+    # Turn these into plain/html MIMEText objects
+    part2 = MIMEText(html, "html")
+
+    # Add HTML/plain-text parts to MIMEMultipart message
+    # The email client will try to render the last part first
+    message.attach(part2)
+
+    # Create secure connection with server and send email
+    context = ssl.create_default_context()
+    with smtplib.SMTP_SSL("smtp.gmail.com", 465, context=context) as server:
+        server.login(sender_email, password)
+        server.sendmail(
+            sender_email, receiver_email, message.as_string()
+        )
+        print("email sent successfully")
+
+

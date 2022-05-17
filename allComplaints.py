@@ -12,8 +12,6 @@ import sqlite3
 
 
 def viewAllComplaits():
-
-
     technicianWindow = tkinter.Tk()
     technicianWindow.title("All Complaints")
     # technicianWindow = Toplevel()
@@ -57,7 +55,7 @@ def viewAllComplaits():
 
     def viewDetailsWindow():
         detailsWindow = Toplevel(technicianWindow)
-        detailsWindow.title("Technician's Details")
+        detailsWindow.title("Complaint Details")
         # detailsWindow.geometry("800x800")
 
 
@@ -118,7 +116,6 @@ def viewAllComplaits():
 
 
 
-
         for(customerName, customerNmber, customerEmail, customerAddress, invoiceNumber, customerCity, customerPincode, productSerialNumber, productType, productName, complaintDescription, allocatedTechnician, complaintDate, status) in reqComplaint:
             t1 = tkinter.Label(detailsWindow, text=customerName)
             t1.grid(row=2, column= 1)
@@ -164,7 +161,6 @@ def viewAllComplaits():
             t13 = tkinter.Label(detailsWindow, text=status)
             t13.grid(row=16, column= 1)
 
-
             detailsWindow.grid_rowconfigure([1,3,5,7,9,11,13,15], minsize=10)  # Here
 
 
@@ -187,6 +183,45 @@ def viewAllComplaits():
             mapCreator(employeeAddress, customerAddress)
 
 
+        def emailHandler():
+
+            # print(status)
+
+            if status == "open":
+                subject = """Your complaint is in progress"""
+
+                message = """
+                        
+                <p1> 
+                    Your complaint has been registered successfully.
+                </p1><br>
+                <p2>
+                    We are working on your complaint, We will soon contact you.
+                </p2>
+
+                """
+                mailer(customerEmail, subject, message)
+
+            elif status == "close":
+                subject = """Complaint Status"""
+
+                message = """
+                        
+                <p1> 
+                    Your Complaint has been resolved successfully.
+                </p1><br>
+                <p2>
+                    Please provide your feedback on our website.
+                </p2>
+
+                """
+                mailer(customerEmail, subject, message)
+
+
+
+                
+
+
 
         b = tkinter.Button(detailsWindow, text="close complaint", command= closeComplaintHandler)
         b.grid(row=17, column=0, columnspan=1, rowspan=2, sticky=tkinter.W +
@@ -198,7 +233,7 @@ def viewAllComplaits():
             tkinter.E + tkinter.N + tkinter.S, padx=5, pady=5)
 
 
-        b3 = tkinter.Button(detailsWindow, text="email status")
+        b3 = tkinter.Button(detailsWindow, text="email status", command= emailHandler)
         b3.grid(row=17, column=4, columnspan=1, rowspan=2, sticky=tkinter.W +
             tkinter.E + tkinter.N + tkinter.S, padx=5, pady=5)
 
@@ -265,48 +300,30 @@ def viewAllComplaits():
     rowVar = 1
 
     for(customerName, customerNmber, customerEmail, customerAddress, invoiceNumber, customerCity, customerPincode, productSerialNumber, productType, productName, complaintDescription, allocatedTechnician, complaintDate, status) in listallComplaints:
-        t1 = tkinter.Label(technicianWindow, text=customerName)
-        t1.grid(row=rowVar, column= 2)
+        
+        t1 = tkinter.Label(technicianWindow, text=invoiceNumber)
+        t1.grid(row=rowVar, column= 0)  
 
-        t2 = tkinter.Label(technicianWindow, text=customerNmber)
-        t2.grid(row=rowVar, column= 4)
+        t2 = tkinter.Label(technicianWindow, text=customerName)
+        t2.grid(row=rowVar, column= 2)
 
-        # t2 = tkinter.Label(technicianWindow, text=customerEmail)
-        # t2.grid(row=rowVar, column= 4)
+        t3 = tkinter.Label(technicianWindow, text=customerNmber)
+        t3.grid(row=rowVar, column= 4)
 
+        t4 = tkinter.Label(technicianWindow, text=productType)
+        t4.grid(row=rowVar, column= 6)     
 
-        # t3 = tkinter.Label(technicianWindow, text=customerAddress)
-        # t3.grid(row=rowVar, column= 6)
+        t5 = tkinter.Label(technicianWindow, text=productName)
+        t5.grid(row=rowVar, column= 8)     
 
-        t4 = tkinter.Label(technicianWindow, text=invoiceNumber)
-        t4.grid(row=rowVar, column= 0)     
+        t6 = tkinter.Label(technicianWindow, text=allocatedTechnician)
+        t6.grid(row=rowVar, column= 10)
 
-        # t5 = tkinter.Label(technicianWindow, text=customerCity)
-        # t5.grid(row=rowVar, column= 10)     
+        t7 = tkinter.Label(technicianWindow, text=complaintDate)
+        t7.grid(row=rowVar, column= 12)
 
-        # t6 = tkinter.Label(technicianWindow, text=customerPincode)
-        # t6.grid(row=rowVar, column= 12)     
-
-        # t7 = tkinter.Label(technicianWindow, text=productSerialNumber)
-        # t7.grid(row=rowVar, column= 14)     
-
-        t8 = tkinter.Label(technicianWindow, text=productType)
-        t8.grid(row=rowVar, column= 6)     
-
-        t9 = tkinter.Label(technicianWindow, text=productName)
-        t9.grid(row=rowVar, column= 8)     
-
-        # t10 = tkinter.Label(technicianWindow, text=complaintDescription)
-        # t10.grid(row=rowVar, column= 8)
-
-        t11 = tkinter.Label(technicianWindow, text=allocatedTechnician)
-        t11.grid(row=rowVar, column= 10)
-
-        t12 = tkinter.Label(technicianWindow, text=complaintDate)
-        t12.grid(row=rowVar, column= 12)
-
-        t13 = tkinter.Label(technicianWindow, text=status)
-        t13.grid(row=rowVar, column= 14)
+        t8 = tkinter.Label(technicianWindow, text=status)
+        t8.grid(row=rowVar, column= 14)
 
         rB = tkinter.Radiobutton(technicianWindow, variable = selectedComplaint, value = invoiceNumber, command= rbOnClick)
         rB.grid(row=rowVar, column= 15)
@@ -316,18 +333,9 @@ def viewAllComplaits():
 
 
 
-    # selectedComplaint = tkinter.StringVar()
-
     b = tkinter.Button(technicianWindow, text="view details", command= viewDetailsWindow)
     b.grid(row=rowVar+5, column=6, columnspan=1, rowspan=2, sticky=tkinter.W +
         tkinter.E + tkinter.N + tkinter.S, padx=5, pady=5)
 
-    # selectionLabel = tkinter.Entry(technicianWindow, textVariable= selectedComplaint.set() )
-    # selectionLabel.grid(row = rowVar+4, column = 12, rowspan=3, columnspan=3)
-
-    # print(rowVar)
     # setting space between columns
     technicianWindow.grid_columnconfigure([1,3,5,7,9,11,13], minsize=10)  # Here
-
-    # h = Scrollbar(technicianWindow, orient='horizontal')
-    # h.grid(row = rowVar +1,side = BOTTOM, fill = X)

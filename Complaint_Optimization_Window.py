@@ -160,9 +160,19 @@ def addComplaint():
             # configuring job confirmation mail to tech support employee
             subject = 'Hired as technician in Royal Tech Support'
 
-            message = 'This is my message'
+            message = """
 
-            mailsender(reciever= email.get(), subject=subject, message= message)
+            <p1> Congratulations! This email is to formally offer you the job of Technician for Royal Tech Support. 
+            We strongly believe that your skills and expertise will help our company to reach new heights and hoping to make our costumers a happy and satisfied your work. 
+            </p1><br>
+            <p2>As we discussed with you previously, you must start on 01-06-2022, and the salary stands at ₹4,00,000 per annum. 
+                We have the policy to disburse the salary by 10th of every month, and it will be credited directly to your bank account.
+            </p2>
+
+            """
+
+            mailer(email.get(),subject, message)
+            # mailsender(reciever= email.get(), subject=subject, message= message)
 
 
             # print(name.get())
@@ -339,6 +349,55 @@ def addComplaint():
     # pincode = tkinter.StringVar()
 
     def addComplaint():
+        def mailSender():
+            customerSubject = """Your complaint has been added"""
+
+            customerMessage = """
+                        
+                <p1> 
+                    Your complaint has been registered successfully.
+                </p1><br>
+                <p2>
+                    We have assigned a technician for your complaints, he will soon contact on behalf of our company.
+                </p2>
+
+            """
+
+
+            conn = sqlite3.connect('Complaint_box.db')              # create a database or connect to one
+            c = conn.cursor()                                       # create cursor
+            
+                        # Querying in database
+            query = "SELECT employeeId, email FROM employees WHERE employeeId =  '" + selectedTechnician.get() + "'"
+            c.execute(query)
+            emplyoeeDetail = c.fetchall()
+
+            for(employeeId,email) in emplyoeeDetail:
+                technicianEmail = email
+
+
+            print(technicianEmail)
+
+
+
+
+            technicianSubject = """New Complaint added to you list"""
+            technicianMessage = """
+                        
+                <p1> 
+                    A new task has been assigned to you.
+                </p1><br>
+                <p2>
+                    You can login to your account and check for more details about your customer and complaint.
+                </p2>
+
+            """
+
+            mailer(cstmrEmail.get(), customerSubject, customerMessage)
+            mailer(technicianEmail, technicianSubject, technicianMessage)
+
+
+
         # create a database or connect to one
         conn = sqlite3.connect('Complaint_box.db')
 
@@ -389,6 +448,8 @@ def addComplaint():
 
         # close connection
         conn.close()
+
+        mailSender()
 
         print("added to db")
 
