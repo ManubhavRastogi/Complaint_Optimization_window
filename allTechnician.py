@@ -5,13 +5,14 @@ import tkinter as tk
 from tkinter import *
 from tkinter.ttk import *
 from tkcalendar import DateEntry
+from converter import *
 
 import sqlite3
 
 
 def viewAllTechnician():
-    technicianWindow = tkinter.Tk()
-    technicianWindow.title("Tech Support Partners")
+    complaintWindow = tkinter.Tk()
+    complaintWindow.title("Tech Support Partners")
 
     # technicianWindow = Toplevel()
     # technicianWindow.title("All Technicians")
@@ -19,15 +20,45 @@ def viewAllTechnician():
 
     # Handling employees of selected product type data from database
 
-    selectedEmployee = tkinter.StringVar(technicianWindow)
+    selectedEmployee = tkinter.StringVar(complaintWindow)
 
     def rbOnClick():
         print(selectedEmployee.get())
 
 
+    def deleteTechnician():
+
+        # create a database or connect to one
+        conn = sqlite3.connect('Complaint_box.db')
+
+                    # create cursor
+        c = conn.cursor()
+
+
+        c.execute("DELETE FROM employees WHERE employeeId = '" + selectedEmployee.get() + "'")
+
+
+
+        # commit changes
+        conn.commit()
+
+                    # close connection
+        conn.close()
+
+        complaintWindow.destroy()
+
+        viewAllTechnician()
+
+    def exportData():
+        spreadsheetConverter("employeesData", "employees")
+        print("data exported")
+
+
+
+
 
     def viewDetailsWindow():
-        detailsWindow = Toplevel(technicianWindow)
+        detailsWindow = Toplevel(complaintWindow)
         detailsWindow.title("Technician's Details")
         detailsWindow.config(background="white")
         # detailsWindow.geometry("800x800")
@@ -116,37 +147,45 @@ def viewAllTechnician():
 
 
     # Setting labels for selection window
-    defEmpIdLabel = tkinter.Label(technicianWindow, text="Employee Id :", bg ="yellow", font='ariel 10 bold')
+    defEmpIdLabel = tkinter.Label(complaintWindow, text="Employee Id :", bg ="yellow", font='ariel 10 bold')
     defEmpIdLabel.grid(row=0, column= 0)
-    defNameLabel = tkinter.Label(technicianWindow, text="Employee Name :", bg ="yellow", font='ariel 10 bold')
+    defNameLabel = tkinter.Label(complaintWindow, text="Employee Name :", bg ="yellow", font='ariel 10 bold')
     defNameLabel.grid(row=0, column= 2)
-    defEmailLabel = tkinter.Label(technicianWindow, text="Email :", bg="yellow", font='ariel 10 bold')
+    defEmailLabel = tkinter.Label(complaintWindow, text="Email :", bg="yellow", font='ariel 10 bold')
     defEmailLabel.grid(row=0, column= 4)
-    defExpLabel = tkinter.Label(technicianWindow, text="Expertise :", bg ="yellow", font='ariel 10 bold')
+    defExpLabel = tkinter.Label(complaintWindow, text="Expertise :", bg ="yellow", font='ariel 10 bold')
     defExpLabel.grid(row=0, column= 6)
     rowVar = 1
 
     for(employeeId, fullName, email, mobile, techExpertise, city, district, address, pincode) in listallEmployees:
-        empIdLabel = tkinter.Label(technicianWindow, text=employeeId,font='ariel 9')
+        empIdLabel = tkinter.Label(complaintWindow, text=employeeId,font='ariel 9')
         empIdLabel.grid(row=rowVar, column=0)
-        nameLabel = tkinter.Label(technicianWindow, text=fullName, font='ariel 9')
+        nameLabel = tkinter.Label(complaintWindow, text=fullName, font='ariel 9')
         nameLabel.grid(row=rowVar, column=2)
-        emailLabel = tkinter.Label(technicianWindow, text=email, font='ariel 9')
+        emailLabel = tkinter.Label(complaintWindow, text=email, font='ariel 9')
         emailLabel.grid(row=rowVar, column=4)
-        expertiseLabel = tkinter.Label(technicianWindow, text=techExpertise, font='ariel 9')
+        expertiseLabel = tkinter.Label(complaintWindow, text=techExpertise, font='ariel 9')
         expertiseLabel.grid(row=rowVar, column=6)
 
-        rB = tkinter.Radiobutton(technicianWindow, variable=selectedEmployee, value=employeeId, command=rbOnClick)
+        rB = tkinter.Radiobutton(complaintWindow, variable=selectedEmployee, value=employeeId, command=rbOnClick)
         rB.grid(row=rowVar, column=7)
 
 
         rowVar = rowVar + 1
     
 
-    b = tkinter.Button(technicianWindow, text="view Details", command= viewDetailsWindow)
-    b.grid(row=rowVar+2, column=4, columnspan=1, rowspan=2, sticky=tkinter.W +
+    b = tkinter.Button(complaintWindow, text="view Details", command= viewDetailsWindow)
+    b.grid(row=rowVar+2, column=0, columnspan=1, rowspan=2, sticky=tkinter.W +
+        tkinter.E + tkinter.N + tkinter.S, padx=5, pady=5)
+
+    b2 = tkinter.Button(complaintWindow, text="delete technician", command= deleteTechnician)
+    b2.grid(row=rowVar+2, column=4, columnspan=1, rowspan=2, sticky=tkinter.W +
+        tkinter.E + tkinter.N + tkinter.S, padx=5, pady=5)
+
+    b2 = tkinter.Button(complaintWindow, text="export all technician data", command= exportData)
+    b2.grid(row=rowVar+2, column=6, columnspan=1, rowspan=2, sticky=tkinter.W +
         tkinter.E + tkinter.N + tkinter.S, padx=5, pady=5)
 
 
     # setting space between columns
-    technicianWindow.grid_columnconfigure([1,3,5], minsize=30)  # Here
+    complaintWindow.grid_columnconfigure([1,3,5], minsize=30)  # Here

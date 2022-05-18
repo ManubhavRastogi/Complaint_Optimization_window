@@ -6,6 +6,8 @@ from tkinter import *
 from tkinter.ttk import *
 from tkcalendar import DateEntry
 
+from converter import *
+
 from map import *
 
 import sqlite3
@@ -49,6 +51,35 @@ def viewAllComplaits():
 
         viewAllComplaits()
 
+
+
+
+    def deleteComplaint():
+        # create a database or connect to one
+        conn = sqlite3.connect('Complaint_box.db')
+
+                    # create cursor
+        c = conn.cursor()
+
+
+        c.execute("DELETE FROM complaints WHERE invoiceNumber = '" + selectedComplaint.get() + "'")
+
+
+
+
+        # commit changes
+        conn.commit()
+
+                    # close connection
+        conn.close()
+
+        technicianWindow.destroy()
+
+        viewAllComplaits()
+
+    def exportData():
+        spreadsheetConverter("complaintsData", "complaints")
+        print("data exported")
 
 
 
@@ -283,7 +314,15 @@ def viewAllComplaits():
 
 
     b = tkinter.Button(technicianWindow, text="view details", command= viewDetailsWindow)
-    b.grid(row=rowVar+5, column=6, columnspan=1, rowspan=2, sticky=tkinter.W +
+    b.grid(row=rowVar+5, column=2, columnspan=1, rowspan=2, sticky=tkinter.W +
+        tkinter.E + tkinter.N + tkinter.S, padx=5, pady=5)
+
+    b2 = tkinter.Button(technicianWindow, text="delete complaint", command= deleteComplaint)
+    b2.grid(row=rowVar+5, column=7, columnspan=1, rowspan=2, sticky=tkinter.W +
+        tkinter.E + tkinter.N + tkinter.S, padx=5, pady=5)
+
+    b2 = tkinter.Button(technicianWindow, text="exports all complaints", command= exportData)
+    b2.grid(row=rowVar+5, column=12, columnspan=1, rowspan=2, sticky=tkinter.W +
         tkinter.E + tkinter.N + tkinter.S, padx=5, pady=5)
 
     # setting space between columns

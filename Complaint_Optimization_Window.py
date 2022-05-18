@@ -16,7 +16,7 @@ def addComplaint():
     # creates a Tk() object
     master = tkinter.Tk()
     master.title("Complaint Optimization Window")
-    master.geometry("845x300")
+    # master.geometry("845x300")
 
     serviceOptions = [
             "Air Conditioner and fans",
@@ -278,11 +278,6 @@ def addComplaint():
             tkinter.E + tkinter.N + tkinter.S, padx=5, pady=5)
 
 
-        # Button for querying in employee
-        b = tkinter.Button(window, text="show Employees", command=query)
-        b.grid(row=24, column=1, columnspan=1, rowspan=2, sticky=tkinter.W +
-            tkinter.E + tkinter.N + tkinter.S, padx=5, pady=5)
-
 
         window.mainloop()
 
@@ -498,8 +493,6 @@ def addComplaint():
 
     menubar = Menu(master)
     filemenu = Menu(menubar, tearoff=0)
-    filemenu.add_command(label="New", command=donothing)
-    filemenu.add_command(label="Open", command=donothing)
     filemenu.add_command(label="Add Technician", command=addTechnician)
     filemenu.add_command(label="All Technician", command=viewAllTechnician)
     filemenu.add_command(label="All Complaints", command=viewAllComplaits)
