@@ -353,6 +353,7 @@ def addComplaint():
                 </p2>
 
             """
+            mailer(cstmrEmail.get(), customerSubject, customerMessage)
 
 
             conn = sqlite3.connect('Complaint_box.db')              # create a database or connect to one
@@ -384,7 +385,6 @@ def addComplaint():
 
             """
 
-            mailer(cstmrEmail.get(), customerSubject, customerMessage)
             mailer(technicianEmail, technicianSubject, technicianMessage)
 
 

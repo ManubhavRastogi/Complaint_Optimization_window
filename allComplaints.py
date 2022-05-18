@@ -14,7 +14,6 @@ import sqlite3
 def viewAllComplaits():
     technicianWindow = tkinter.Tk()
     technicianWindow.title("All Complaints")
-    technicianWindow.config(background="white")
     # technicianWindow = Toplevel()
     # technicianWindow.title("All Technicians")
     # technicianWindow.geometry("12000X800")
