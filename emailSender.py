@@ -6,7 +6,7 @@ def mailer(receiver_email, subject, emailMessage):
 
     sender_email = "complaintoptimizationwindow@gmail.com"
     # receiver_email = "manubhav2002rastogi@gmail.com"
-    password = "Manubhav@123"
+    password = "zrqf agap ojup fpmf"
 
     message = MIMEMultipart("alternative")
     message["Subject"] = subject
@@ -39,5 +39,8 @@ def mailer(receiver_email, subject, emailMessage):
             sender_email, receiver_email, message.as_string()
         )
         print("email sent successfully")
+
+
+# mailer("mukulkumar2652@gmail.com", "testing", "message")
 
 
